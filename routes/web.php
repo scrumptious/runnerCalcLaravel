@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DefaultController@index')->name('app_homepage');
+
+Route::get('/contact', 'ContactController@index')->name('app_contact');
+
+Route::resource('/runner', 'RunnerController');
