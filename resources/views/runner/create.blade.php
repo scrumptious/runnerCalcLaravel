@@ -51,16 +51,13 @@
 </div>
 <br><hr>
 <div class="row">
-  <div class="col-md-1 offset-1">
+  <div class="col-md-1 offset-2">
     {{ Form::submit('Save changes', ['class' => 'btn btn-success']) }}
   </div>
   <div class="col-md-1 offset-1">
     <a href="{{ route('runner.index') }}" class="btn btn-danger">Discard</a>
   </div>
   {{ Form::close() }}
-  <div class="col-md-1 offset-1">
-    <a href="{{ route('runner.index') }}" class="btn btn-info">See all runners</a>
-  </div>
 </div>
 
 @endsection

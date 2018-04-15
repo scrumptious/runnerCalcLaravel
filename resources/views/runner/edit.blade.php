@@ -53,17 +53,14 @@
 <br>
 <hr>
 <div class="row">
-  <div class="col">
+  <div class="col-md-1 offset-1">
     {{ Form::submit('Save changes', ['class' => 'btn btn-primary']) }}
   </div>
-  <div class="col">
+  <div class="col-md-1 offset-1">
     <a href="{{ route('runner.index') }}" class="btn btn-danger">Discard</a>
   </div>
   {{ Form::close() }}
-  <div class="col">
-    <a href="{{ route('runner.index') }}" class="btn btn-info">See all runners</a>
-  </div>
-  <div class="col">
+  <div class="col-md-1 offset-1 ">
     <a href="{{ route('runner.destroy', ['id' => $runner->id]) }}" class="btn btn-danger">Delete</a>
   </div>
 </div>
