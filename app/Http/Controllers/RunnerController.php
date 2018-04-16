@@ -31,8 +31,14 @@ class RunnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, $message = null) {
+        $runner = $request->all();
+        // print_r($runner);
+        DB::insert('insert into runner (name, age, distance, hours, minutes, seconds) values (:name, :age, :distance, :hours, :minutes, :seconds)',
+        ['name' => $runner['name'], 'age' => $runner['age'], 'distance' => $runner['distance'], 'hours' => $runner['hours'], 'minutes' => $runner['minutes'], 'seconds' => $runner['seconds']]
+    );
+        Session('message', $runner['name'] . ' has been added successfuly');
+        return redirect()->route('runner.index');
     }
 
     /**
@@ -66,6 +72,18 @@ class RunnerController extends Controller
      */
     public function update(Request $request, $id) {
         //
+        $runner = $request->all();
+
+        DB::insert('update runner set name = :name, age = :age, distance = :distance, hours = :hours,
+        minutes = :minutes, seconds = :seconds where id = :id',
+        ['name' => $runner['name'], 'age' => $runner['age'], 'distance' => $runner['distance'],
+        'hours' => $runner['hours'], 'minutes' => $runner['minutes'], 'seconds' => $runner['seconds'],
+        'id' => $id]
+        );
+
+
+        return redirect()->route('runner.index');
+
     }
 
     /**
@@ -75,6 +93,7 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        DB::delete('delete from runner where id = :id', ['id' => $id]);
+        return redirect()->route('runner.index');
     }
 }

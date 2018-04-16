@@ -10,11 +10,17 @@
   </div>
 </div>
 <div class="row"> {{--row ending in wrong place --}}
-  <div class="col-md-3 offset-2">
-    {{-- {{ var_dump($runner) }} --}} {{ Form::open(['route' => 'runner.store', 'method' => 'post']) }} {{-- {{ Form::open(['url'=>'foo/bar','method'=>'put'])
-    }} --}}
+  <div class="col-md-2 offset-2">
+    {{ Form::open(['route' => 'runner.store', 'method' => 'post']) }}
     <div class="form-group">
-      {{ Form::label('name', 'Name', ['class' => 'lead']) }} {{ Form::text('name', '', ['class' => 'form-control', 'required' => 'required']) }}
+      {{ Form::label('name', 'Name', ['class' => 'lead']) }}
+      {{ Form::text('name', '', ['class' => 'form-control', 'required' => 'required']) }}
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="form-group">
+      {{ Form::label('age', 'Age', ['class' => 'lead']) }}
+      {{ Form::number('age', '', ['class' => 'form-control narrow-input', 'required' => 'required']) }}
     </div>
   </div>
 </div>
@@ -52,10 +58,10 @@
 <br><hr>
 <div class="row">
   <div class="col-md-1 offset-2">
-    {{ Form::submit('Save changes', ['class' => 'btn btn-success']) }}
+    {{ Form::submit('Add runner', ['class' => 'btn btn-outline-success font-weight-bold']) }}
   </div>
   <div class="col-md-1 offset-1">
-    <a href="{{ route('runner.index') }}" class="btn btn-danger">Discard</a>
+    <a href="{{ route('runner.index') }}" class="btn btn-outline-danger"><strong>Cancel</strong></a>
   </div>
   {{ Form::close() }}
 </div>

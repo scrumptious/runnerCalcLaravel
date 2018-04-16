@@ -5,17 +5,24 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-6 offset-1">
+  <div class="col-md-5 offset-1">
     <h1>Edit runner's info</h1>
     <hr>
   </div>
 </div>
-<div class="row"> {{--row ending in wrong place --}}
-  <div class="col-md-3 offset-2">
-    {{ Form::open(['route' => ['runner.update', 'id' => $runner->id], 'method' => 'post']) }}
+<div class="row">
+  <div class="col-md-2 offset-2">
+    {{ Form::open(['route' => ['runner.update', 'id' => $runner->id], 'method' => 'put']) }}
+    @csrf
     <div class="form-group">
       {{ Form::label('name', 'Name', ['class' => 'lead']) }}
       {{ Form::text('name', $runner->name, ['class' => 'form-control', 'required' => 'required']) }}
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="form-group">
+      {{ Form::label('age', 'Age', ['class' => 'lead']) }}
+      {{ Form::number('age', $runner->age, ['class' => 'form-control narrow-input', 'required' => 'required', 'min' => 1, 'max' => 120]) }}
     </div>
   </div>
 </div>
@@ -33,7 +40,7 @@
 <br>
 <div class="row">
   <div class="col-md-3 offset-2">
-    {{ Form::label('result', 'Your result', ['class' => 'lead', 'required' => 'required']) }}
+    {{ Form::label('result', $runner->name . '\'s result', ['class' => 'lead', 'required' => 'required']) }}
   </div>
 </div>
 <div class="row">
@@ -53,15 +60,20 @@
 <br>
 <hr>
 <div class="row">
-  <div class="col-md-1 offset-1">
-    {{ Form::submit('Save changes', ['class' => 'btn btn-primary']) }}
+  <div class="col-md-1 offset-2">
+    {{ Form::submit('Save changes', ['class' => 'btn btn-outline-success font-weight-bold']) }}
   </div>
   <div class="col-md-1 offset-1">
-    <a href="{{ route('runner.index') }}" class="btn btn-danger">Discard</a>
+    <a href="{{ route('runner.index') }}" class="btn btn-outline-danger"><strong>Cancel</strong></a>
   </div>
   {{ Form::close() }}
+
   <div class="col-md-1 offset-1 ">
-    <a href="{{ route('runner.destroy', ['id' => $runner->id]) }}" class="btn btn-danger">Delete</a>
+  {{-- {{ Form::open(['route' => ['runner.destroy', 'id' => $runner->id], 'method'=> 'delete']) }}
+    @csrf
+    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+  {{ Form::close() }} --}}
+    {{-- <a href="{{ route('runner.destroy', ['id' => $runner->id]) }}" class="btn btn-danger">Delete</a> --}}
   </div>
 </div>
 
