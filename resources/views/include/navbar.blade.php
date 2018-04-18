@@ -10,7 +10,7 @@
         <a class="nav-link" href="{{ route('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Calculator</a>
+        <a class="nav-link" href="{{ route('app_calculator') }}">Calculator</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Pace table</a>

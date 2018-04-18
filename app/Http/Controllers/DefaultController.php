@@ -9,8 +9,7 @@ class DefaultController extends Controller {
 
     public function index() {
 
-        $runners = DB::select('select * from runner');
-        return view('welcome', ['runner' => $runners]);
+        return view('welcome');
     }
     public function show($id) {
 

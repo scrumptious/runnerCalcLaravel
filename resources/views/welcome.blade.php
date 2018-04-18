@@ -7,11 +7,25 @@
 @endsection
 
 @section('content')
-    <p class="lead">database connection test</p>
-    @if (isset($runners))
-        @foreach ($runners as $runner)
-            <p>{{ $runner->name}} is {{ $runner->age }} today.
-                Best result so far is {{ $runner->hours }}:{{ $runner->minutes }}:{{ $runner->seconds }} on a {{ $runner->distance }} distance!</p>
-        @endforeach
-    @endif
+    <p class="lead">
+        - TO DO show nice jumbo and some content
+    </p>
+    <p class="lead">
+        - Make some calculations finally
+    </p>
+    <p class="lead">
+        - Print out pace table
+    </p>
+    <p class="lead">
+        - Make contact form work
+    </p>
+    <p class="lead">
+        - JSON responses?
+    </p>
+    <p class="lead">
+        - Make website look nice
+    </p>
+    <p  class="lead">
+        - Deploy website and link from my portfolio
+    </p>
 @endsection

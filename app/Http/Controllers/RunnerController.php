@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Models\Runner;
 
 class RunnerController extends Controller
 {
@@ -13,7 +14,8 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $runners = DB::select('select * from runner order by distance DESC');
+        // $runners = DB::select('select * from runner order by distance DESC');
+        $runners = Runner::all();
         return view('runner.index', ['runners' => $runners]);
     }
     /**
@@ -32,12 +34,13 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $message = null) {
-        $runner = $request->all();
-        // print_r($runner);
-        DB::insert('insert into runner (name, age, distance, hours, minutes, seconds) values (:name, :age, :distance, :hours, :minutes, :seconds)',
-        ['name' => $runner['name'], 'age' => $runner['age'], 'distance' => $runner['distance'], 'hours' => $runner['hours'], 'minutes' => $runner['minutes'], 'seconds' => $runner['seconds']]
-    );
-        Session('message', $runner['name'] . ' has been added successfuly');
+        // $runner = $request->all();
+        // DB::insert('insert into runner (name, age, distance, hours, minutes, seconds) values (:name, :age, :distance, :hours, :minutes, :seconds)',
+        // ['name' => $runner['name'], 'age' => $runner['age'], 'distance' => $runner['distance'], 'hours' => $runner['hours'], 'minutes' => $runner['minutes'], 'seconds' => $runner['seconds']]
+        // );
+
+        // let's use Eloquent instead of raw SQL
+        Runner::create($request->all());
         return redirect()->route('runner.index');
     }
 
@@ -48,7 +51,7 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $runner = DB::select('select * from runner where id = :id', ['id' =>$id]);
+        $runner = DB::select('select * from runners where id = :id', ['id' =>$id]);
         return view('runner.show', ['runner' => $runner[0], 'id' => $id]);
     }
 
@@ -59,8 +62,8 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $runner = DB::select('select * from runner where id = :id', ['id' => $id]);
-        return view('runner.edit', ['runner' => $runner[0]]);
+        $runner = Runner::find($id);
+        return view('runner.edit', ['runner' => $runner]);
     }
 
     /**
@@ -71,19 +74,16 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
         $runner = $request->all();
 
-        DB::insert('update runner set name = :name, age = :age, distance = :distance, hours = :hours,
+        DB::insert('update runners set name = :name, age = :age, distance = :distance, hours = :hours,
         minutes = :minutes, seconds = :seconds where id = :id',
         ['name' => $runner['name'], 'age' => $runner['age'], 'distance' => $runner['distance'],
         'hours' => $runner['hours'], 'minutes' => $runner['minutes'], 'seconds' => $runner['seconds'],
         'id' => $id]
         );
 
-
         return redirect()->route('runner.index');
-
     }
 
     /**
@@ -93,7 +93,7 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        DB::delete('delete from runner where id = :id', ['id' => $id]);
+        DB::delete('delete from runners where id = :id', ['id' => $id]);
         return redirect()->route('runner.index');
     }
 }
