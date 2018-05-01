@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
 use App\Mail\contactMessage;
+use Mail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
 
 class ContactController extends Controller {
 
@@ -18,17 +19,36 @@ class ContactController extends Controller {
         Ea natus porro beatae possimus ratione a soluta cupiditate molestiae reprehenderit? Aspernatur quod eveniet perspiciatis veniam at aliquid sapiente nesciunt aperiam nam, dolore saepe consectetur, rem animi! Voluptatem, explicabo magnam.
         Dolor cumque ex nihil, ut hic nobis aliquid dolorem. Amet consectetur fugit quos eos, vel maiores aperiam delectus enim magnam error rerum ab ipsa in, unde officia, nobis odit commodi';
         // if form submitted
-        if(!empty($runner)) {
-            return redirect()->action('ContactController@send', ['runner' => $runner]);
-        }
-        // else show contact form
+
         return view('contact/index', ['runner' => $runner]);
     }
 
     public function send(Request $request) {
-        $name = $request->name;
-        $runner = $request->all();
-        Mail::to('jasiurski@gmail.com')->send(new contactMessage($request));
+        $this->validate($request, [
+            'message' => 'min:10',
+            'subject' => 'min:3',
+            'name' => 'min:3',
+            'email' => 'required|email']);
+        // we CANNOT pass a variable called 'message', as it's reserved keyword, so lets use other name
+        
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'enquiry' => $request->message
+        );
+
+        Mail::send('emails.contact', $data, function($message) use ($data) {
+            $message->from($data['email']);
+            $message->to('ljasiurski@gmail.com');
+            $message->subject($data['subject']);
+        });
+
+        // $request->session()->flash('success', "We received your email, thank you!");
+        // Session::flash('status', 'Your email was sent!');
+
+        // Session::flash('failure', )
+
         // Mail::send('emails.contactMessage', ['name' => $name], function ($message, $runner) {
         //     $message->from($runner['email'], $runner['name']);
         //     $message->to('ljasiurski@gmail.com');

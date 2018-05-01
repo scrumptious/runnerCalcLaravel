@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExample04">
+  <div class="collapse navbar-collapse" id="simpleNavBar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('app_homepage') }}">Home <span class="sr-only">(current)</span></a>
@@ -13,10 +13,10 @@
         <a class="nav-link" href="{{ route('app_calculator') }}">Calculator</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Pace table</a>
+        <a class="nav-link" href="{{ url('contact') }}">Contact</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('app_contact') }}">Contact</a>
+        <a class="nav-link" href="{{ route('post.index') }}">Articles</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('runner.index') }}">Share result</a>

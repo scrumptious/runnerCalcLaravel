@@ -16,7 +16,7 @@
       {{ Form::label('distance', 'Distance', ['class' => 'lead']) }}
       {{ Form::select('distance', [ 'medium' => ['800' => '800m', '1000' => '1000m', '1500' => '1500m', '3000' => '3000m',
       '5000' => '5000m / 5km', '8000' => '5 miles / 8km', '10000' => '10 000m / 10km'], 'long' => ['15000' => '15km',
-      '16100' => '10 miles / 16,1km', '21100' => 'half marathon / 21,1km', '30000' => '30km', '42200K' => 'marathon / 42,2km'] ],
+      '16100' => '10 miles / 16,1km', '21100' => 'half marathon / 21,1km', '30000' => '30km', '42200' => 'marathon / 42,2km'] ],
       ['class' => 'form-control', 'required' => 'required']) }}
     </div>
   </div>

@@ -1,14 +1,8 @@
-@extends('layouts.base')
+<h3>You have  a new contact via a contact form</h3>
 
-@section('title', 'Message sent')
-    
-@endsection
+<div>
+    {{ $enquiry }}
+</div>
 
-@section('content')
-    <h2>{{ $enquiry['subject'] }}</h2>
-    <h3>from: {{ $name }} (<u>{{ $email }}</u>)</h3>
-    <p>
-        {{ $message }}
-    </p>
-
-@endsection
+<p>Sent by {{ $name }}</p>
+<p>by {{ $email }}</p>

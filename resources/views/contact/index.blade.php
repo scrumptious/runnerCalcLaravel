@@ -7,7 +7,7 @@
 @if (!isset($runner['name']))
   <div class="row">
     <div class="col-md-4">
-      {!! Form::open(['url' => url()->current(), 'method' => 'GET']) !!}
+      {!! Form::open(['url' => url('contact'), 'method' => 'POST']) !!}
       <div class="form-group">
         {{ Form::label('name', 'Name', ['class' => 'lead']) }}
         {{ Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Enter name'] )}}

@@ -17,12 +17,6 @@
         - Print out pace table
     </p>
     <p class="lead">
-        - Make contact form work
-    </p>
-    <p class="lead">
-        - JSON responses?
-    </p>
-    <p class="lead">
         - Make website look nice
     </p>
     <p  class="lead">

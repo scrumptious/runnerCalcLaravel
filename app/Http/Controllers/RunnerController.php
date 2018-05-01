@@ -51,8 +51,9 @@ class RunnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $runner = DB::select('select * from runners where id = :id', ['id' =>$id]);
-        return view('runner.show', ['runner' => $runner[0], 'id' => $id]);
+        // $runner = DB::select('select * from runners where id = :id', ['id' =>$id]);
+        $runner = Runner::find($id);
+        return view('runner.show', ['runner' => $runner, 'id' => $id]);
     }
 
     /**

@@ -13,12 +13,12 @@
 
 Route::get('/', 'DefaultController@index')->name('app_homepage');
 
-Route::get('/contact', 'ContactController@index')->name('app_contact');
-
-Route::get('/contact/send', 'ContactController@send');
+Route::get('/contact', 'ContactController@index');
+Route::post('/contact', 'ContactController@send');
 
 Route::get('/calculator', 'CalculatorController@index')->name('app_calculator');
 Route::post('/calculator', 'CalculatorController@math')->name('app_calculator_math');
 Route::get('/calculator/present', 'CalculatorController@present')->name('app_calculator_present');
 
+Route::resource('/post', 'PostController');
 Route::resource('/runner', 'RunnerController');
